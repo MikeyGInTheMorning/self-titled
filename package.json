@@ -19,5 +19,9 @@
     "typescript": "^4.5.4",
     "vite": "^2.9.9",
     "vite-plugin-pwa": "^0.12.2"
+  },
+  "dependencies": {
+    "pnpm": "^7.5.0",
+    "workbox-window": "^6.5.3"
   }
 }
