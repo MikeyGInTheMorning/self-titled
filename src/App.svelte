@@ -60,7 +60,7 @@
     height: 100vh;
   }
   :global(body) {
-    background: #0D0D0D;
+    background: #000000;
     height: 500vh;
   }
   canvas {
