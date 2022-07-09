@@ -3,6 +3,7 @@ lockfileVersion: 5.4
 specifiers:
   '@sveltejs/vite-plugin-svelte': ^1.0.0-next.30
   '@tsconfig/svelte': ^2.0.1
+  '@types/workbox-window': ^4.3.4
   pnpm: ^7.5.0
   svelte: ^3.44.0
   svelte-check: ^2.2.7
@@ -14,6 +15,7 @@ specifiers:
   workbox-window: ^6.5.3
 
 dependencies:
+  '@types/workbox-window': 4.3.4
   pnpm: 7.5.0
   workbox-window: 6.5.3
 
@@ -1375,6 +1377,10 @@ packages:
 
   /@types/trusted-types/2.0.2:
     resolution: {integrity: sha512-F5DIZ36YVLE+PN+Zwws4kJogq47hNgX3Nx6WyDJ3kcplxyke3XIzB8uK5n/Lpm1HBsbGzd6nmGehL8cPekP+Tg==}
+
+  /@types/workbox-window/4.3.4:
+    resolution: {integrity: sha512-Zyac7JfCO1iWLeHxC/hwJ132nXta/x0hl1kERdvHSUU2qVgQ7slmF9C0xhzWADRu7XO4v9+po9xtGD4yonlzyA==}
+    dev: false
 
   /acorn/8.7.1:
     resolution: {integrity: sha512-Xx54uLJQZ19lKygFXOWsscKUbsBZW0CPykPhVQdhIeIwrbPmJzqeASDInc8nKBnp/JT6igTs82qPXz069H8I/A==}

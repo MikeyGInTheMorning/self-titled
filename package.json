@@ -21,6 +21,7 @@
     "vite-plugin-pwa": "^0.12.2"
   },
   "dependencies": {
+    "@types/workbox-window": "^4.3.4",
     "pnpm": "^7.5.0",
     "workbox-window": "^6.5.3"
   }
