@@ -65,8 +65,8 @@
   }
   canvas {
     position: fixed;
-    left: calc(100vw / 5);
-    top: calc(100vw / 4);
+    left: calc(100vw / 3);
+    top: 20vh;
     max-height: 100vh;
     max-width: 100vw;
   }
