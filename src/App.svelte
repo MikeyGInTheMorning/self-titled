@@ -2,6 +2,8 @@
   import { onMount } from "svelte";
   import { registerSW } from "virtual:pwa-register";
 
+  let scrollY;
+
   onMount(() => {
     registerSW();
 
@@ -38,9 +40,8 @@
     };
 
     window.addEventListener("scroll", () => {
-      const scrollTop = html.scrollTop;
       const maxScrollTop = html.scrollHeight - window.innerHeight;
-      const scrollFraction = scrollTop / maxScrollTop;
+      const scrollFraction = scrollY / maxScrollTop;
       const frameIndex = Math.min(
         frameCount - 1,
         Math.ceil(scrollFraction * frameCount)
@@ -53,6 +54,7 @@
   });
 </script>
 
+<svelte:window bind:scrollY />
 <canvas id="hero-lightpass" />
 
 <style>
@@ -63,6 +65,20 @@
   :global(body) {
     background: rgba(0, 0, 0, 1) !important;
     height: 500vh;
+  }
+  :global(body::-webkit-scrollbar) {
+    width: 12px; /* width of the entire scrollbar */
+    background: rgba(0, 0, 0, 0);
+  }
+
+  :global(body::-webkit-scrollbar-track) {
+    background: rgba(0, 0, 0, 0); /* color of the tracking area */
+  }
+
+  :global(body::-webkit-scrollbar-thumb) {
+    background-color: rgb(70, 70, 70); /* color of the scroll thumb */
+    border-radius: 20px; /* roundness of the scroll thumb */
+    border: 0px solid rgb(175, 175, 175); /* creates padding around scroll thumb */
   }
   canvas {
     position: fixed;

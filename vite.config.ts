@@ -15,7 +15,7 @@ const pwaOptions = (a: ConfigEnv): Partial<VitePWAOptions> => ({
         urlPattern: /^https:\/\/www.apple.com\/.*/i,
         handler: "CacheFirst",
         options: {
-          cacheName: "apple-cache",
+          cacheName: "apple-images",
           expiration: {
             maxEntries: 10,
             maxAgeSeconds: 60 * 60 * 24 * 365, // <== 365 days
