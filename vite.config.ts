@@ -30,7 +30,7 @@ const pwaOptions = (a: ConfigEnv): Partial<VitePWAOptions> => ({
   manifest: {
     name: "PWA Router",
     short_name: "PWA Router",
-    theme_color: "#ffffff",
+    theme_color: "rgba(0, 0, 0, 1)",
     icons: [
       {
         src: "pwa-192x192.png", // <== don't add slash, for testing
