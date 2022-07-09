@@ -57,11 +57,11 @@
 
 <style>
   :global(html) {
-    background: rgba(0, 0, 0, 1);
+    background: rgba(0, 0, 0, 1) !important;
     height: 100vh;
   }
   :global(body) {
-    background: rgba(0, 0, 0, 1);
+    background: rgba(0, 0, 0, 1) !important;
     height: 500vh;
   }
   canvas {
