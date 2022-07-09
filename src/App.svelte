@@ -1,65 +1,75 @@
 <script lang="ts">
-  import logo from './assets/svelte.png'
-  import Counter from './lib/Counter.svelte'
+  import { onMount } from "svelte"
+
+  onMount(() => {
+    const html = document.documentElement
+    const canvas = document.getElementById(
+      "hero-lightpass"
+    ) as HTMLCanvasElement
+    const context = canvas.getContext("2d")
+
+    const frameCount = 148
+    const currentFrame = (index) =>
+      `https://www.apple.com/105/media/us/airpods-pro/2019/1299e2f5_9206_4470_b28e_08307a42f19b/anim/sequence/large/01-hero-lightpass/${index
+        .toString()
+        .padStart(4, "0")}.jpg`
+
+    const preloadImages = () => {
+      for (let i = 1; i < frameCount; i++) {
+        const img = new Image()
+        img.src = currentFrame(i)
+      }
+    }
+
+    const img = new Image()
+    img.src = currentFrame(1)
+    canvas.width = html.offsetWidth
+    canvas.height = html.offsetHeight
+    img.onload = function () {
+      context.drawImage(img, 0, 0)
+    }
+
+    const updateImage = (index) => {
+      img.src = currentFrame(index)
+      context.drawImage(img, 0, 0)
+    }
+
+    window.addEventListener("scroll", () => {
+      const scrollTop = html.scrollTop
+      const maxScrollTop = html.scrollHeight - window.innerHeight
+      const scrollFraction = scrollTop / maxScrollTop
+      const frameIndex = Math.min(
+        frameCount - 1,
+        Math.ceil(scrollFraction * frameCount)
+      )
+
+      requestAnimationFrame(() => updateImage(frameIndex + 1))
+    })
+
+    preloadImages()
+  })
 </script>
 
-<main>
-  <img src={logo} alt="Svelte Logo" />
-  <h1>Hello Typescript!</h1>
-
-  <Counter />
-
-  <p>
-    Visit <a href="https://svelte.dev">svelte.dev</a> to learn how to build Svelte
-    apps.
-  </p>
-
-  <p>
-    Check out <a href="https://github.com/sveltejs/kit#readme">SvelteKit</a> for
-    the officially supported framework, also powered by Vite!
-  </p>
-</main>
+<canvas id="hero-lightpass" />
 
 <style>
-  :root {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
-      Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  :global(html) {
+    height: 100vh;
   }
-
-  main {
-    text-align: center;
-    padding: 1em;
-    margin: 0 auto;
+  :global(body) {
+    background: #000;
+    height: 500vh;
   }
-
-  img {
-    height: 16rem;
-    width: 16rem;
+  :global(.app) {
+    background: #000;
+    width: 100%;
   }
+  canvas {
+    position: fixed;
+    left: calc(100vw/5);
+    top: calc(100vw/4);
+    max-height: 100vh;
+    max-width: 100vw;
 
-  h1 {
-    color: #ff3e00;
-    text-transform: uppercase;
-    font-size: 4rem;
-    font-weight: 100;
-    line-height: 1.1;
-    margin: 2rem auto;
-    max-width: 14rem;
-  }
-
-  p {
-    max-width: 14rem;
-    margin: 1rem auto;
-    line-height: 1.35;
-  }
-
-  @media (min-width: 480px) {
-    h1 {
-      max-width: none;
-    }
-
-    p {
-      max-width: none;
-    }
   }
 </style>
