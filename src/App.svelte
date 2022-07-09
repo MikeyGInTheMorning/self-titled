@@ -56,8 +56,20 @@
 
 <svelte:window bind:scrollY />
 <canvas id="hero-lightpass" />
+<div class="surface">
+  Mike Gulik
+</div>
 
 <style>
+  .surface{
+    position: fixed;
+    top: 0px;
+    left:0px;
+    right:0px;
+    bottom: 0px;
+
+    background-color: rgba(0, 0, 255, .25);
+  }
   :global(html) {
     background: rgba(0, 0, 0, 1) !important;
     height: 100vh;

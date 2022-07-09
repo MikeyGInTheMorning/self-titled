@@ -15,4 +15,5 @@ pnpm dev
 ## Docs and Good To Knows
 
 [Scrolling](https://css-tricks.com/lets-make-one-of-those-fancy-scrolling-animations-used-on-apple-product-pages/)
+
 [Favicon Generator](https://favicon.io/favicon-converter/)
