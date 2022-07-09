@@ -57,6 +57,7 @@
 
 <style>
   :global(html) {
+    background: rgba(0, 0, 0, 1);
     height: 100vh;
   }
   :global(body) {
