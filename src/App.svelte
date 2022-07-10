@@ -7,7 +7,7 @@
   let canvasStyle;
   let scrollY;
   let html;
- 
+
   const frameCount = 77;
   const canvasYStart = 10;
   const titleYEnd = 65;
@@ -49,9 +49,13 @@
   //   return `${url}${index.toString().padStart(5, "0")}.png`;
   // };
 
-  const currentFrame = index => (
-  `https://mg-portfolio.s3.amazonaws.com/face-shadow/${index.toString().padStart(5, '0')}.png`
-)
+    const currentFrame = index => (
+    `https://mg-portfolio.s3.amazonaws.com/face-shadow/${index.toString().padStart(5, '0')}-min.jpg`
+  )
+  // const currentFrame = (index) =>
+  //   `https://www.apple.com/105/media/us/airpods-pro/2019/1299e2f5_9206_4470_b28e_08307a42f19b/anim/sequence/large/01-hero-lightpass/${index
+  //     .toString()
+  //     .padStart(4, "0")}.jpg`;
 
   let imgSrc = currentFrame(1);
   const calculateScroll = () => {
@@ -65,7 +69,7 @@
     );
 
     const nextFrameIndex = frameIndex + 1;
-    imgSrc = currentFrame(nextFrameIndex)
+    imgSrc = currentFrame(nextFrameIndex);
     setCanvasOpacity(nextFrameIndex);
     setTitleOpacity(nextFrameIndex);
   };
@@ -76,13 +80,19 @@
     html = document.documentElement;
   });
 
-  const preloadImages = () =>[...Array(frameCount).keys()].forEach(index => fetch(currentFrame(index)))
-  preloadImages()
+  const preloadImages = () =>
+    [...Array(frameCount).keys()].forEach((index) =>
+    fetch(currentFrame(index), {
+        mode: 'no-cors',
+        method: "GET",
+    })
+    );
+  preloadImages();
 </script>
 
 <svelte:window bind:scrollY />
 <div class="background" style={canvasStyle}>
-  <img src={imgSrc} alt="Loading..." />
+  <img src={imgSrc} alt="Loading..." referrerpolicy="no-referrer" />
 </div>
 <div class="surface" style={titleStyle}>
   <div class="on-surface title">Mike Gulik.</div>
