@@ -12,10 +12,10 @@ const pwaOptions = (a: ConfigEnv): Partial<VitePWAOptions> => ({
     globPatterns: ["**/*.{css,html,png}"],
     runtimeCaching: [
       {
-        urlPattern: /^https:\/\/www.apple.com\/.*/i,
+        urlPattern: /^https:\/\/mg-portfolio.s3.amazonaws.com\/.*/i,
         handler: "CacheFirst",
         options: {
-          cacheName: "apple-images",
+          cacheName: "s3-images",
           expiration: {
             maxEntries: 10,
             maxAgeSeconds: 60 * 60 * 24 * 365, // <== 365 days

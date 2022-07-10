@@ -6,7 +6,8 @@
   let titleStyle;
   let canvasStyle;
   let scrollY;
-
+  let html;
+ 
   const frameCount = 77;
   const canvasYStart = 10;
   const titleYEnd = 65;
@@ -43,11 +44,16 @@
     }
   };
 
-  const currentFrame = (index) => {
-    const url = "./assets/";
-    return `${url}${index.toString().padStart(5, "0")}.png`;
-  };
+  // const currentFrame = (index) => {
+  //   const url = "./assets/";
+  //   return `${url}${index.toString().padStart(5, "0")}.png`;
+  // };
 
+  const currentFrame = index => (
+  `https://mg-portfolio.s3.amazonaws.com/face-shadow/${index.toString().padStart(5, '0')}.png`
+)
+
+  let imgSrc = currentFrame(1);
   const calculateScroll = () => {
     if (!html) return;
     const maxScrollTop = html.scrollHeight - window.innerHeight;
@@ -59,24 +65,24 @@
     );
 
     const nextFrameIndex = frameIndex + 1;
-    requestAnimationFrame(() => (imgSrc = currentFrame(nextFrameIndex)));
+    imgSrc = currentFrame(nextFrameIndex)
     setCanvasOpacity(nextFrameIndex);
     setTitleOpacity(nextFrameIndex);
   };
   $: scrollY && calculateScroll();
 
-  let imgSrc = currentFrame(1);
-  let html;
   onMount(() => {
     registerSW();
     html = document.documentElement;
   });
+
+  const preloadImages = () =>[...Array(frameCount).keys()].forEach(index => fetch(currentFrame(index)))
+  preloadImages()
 </script>
 
 <svelte:window bind:scrollY />
-<div class="canvas-container" style={canvasStyle}>
+<div class="background" style={canvasStyle}>
   <img src={imgSrc} alt="Loading..." />
-  <!-- <canvas id="hero-lightpass" /> -->
 </div>
 <div class="surface" style={titleStyle}>
   <div class="on-surface title">Mike Gulik.</div>
@@ -100,8 +106,7 @@
     background-color: rgba(0, 0, 255, 0.15);
     color: white;
   }
-
-  .canvas-container {
+  .background {
     position: fixed;
     left: 0;
     right: 0;
@@ -113,10 +118,5 @@
     display: flex;
     align-items: center;
     justify-content: center;
-  }
-
-  canvas {
-    min-width: 210px;
-    max-width: 810px;
   }
 </style>
