@@ -7,9 +7,11 @@
   let canvasStyle;
   let scrollY;
 
+  const frameCount = 77;
   const canvasYStart = 10;
   const titleYEnd = 65;
   const frameLengths = 10;
+
   const setTitleStyle = (opacity) => {
     titleStyle = `--title-opacity: ${opacity};`;
   };
@@ -46,54 +48,28 @@
     return `${url}${index.toString().padStart(5, "0")}.png`;
   };
 
+  const calculateScroll = () => {
+    if (!html) return;
+    const maxScrollTop = html.scrollHeight - window.innerHeight;
+    const scrollFraction = scrollY / maxScrollTop;
+
+    const frameIndex = Math.min(
+      frameCount - 1,
+      Math.ceil(scrollFraction * frameCount)
+    );
+
+    const nextFrameIndex = frameIndex + 1;
+    requestAnimationFrame(() => (imgSrc = currentFrame(nextFrameIndex)));
+    setCanvasOpacity(nextFrameIndex);
+    setTitleOpacity(nextFrameIndex);
+  };
+  $: scrollY && calculateScroll();
+
   let imgSrc = currentFrame(1);
+  let html;
   onMount(() => {
     registerSW();
-
-    const html = document.documentElement;
-    // const canvas = document.getElementById(
-    //   "hero-lightpass"
-    // ) as HTMLCanvasElement;
-    // const context = canvas.getContext("2d");
-
-    const frameCount = 77;
-
-    const preloadImages = () => {
-      for (let i = 1; i < frameCount; i++) {
-        //imgSrc = currentFrame(i);
-      }
-    };
-
-    // const img = new Image();
-    // img.src = currentFrame(1);
-    // canvas.width = html.offsetWidth > 810 ? 810 : html.offsetWidth;
-    // canvas.height = html.offsetHeight > 1080 ? 1080 : html.offsetHeight;
-
-    // img.onload = function () {
-    //   context.drawImage(img, 0, 0);
-    // };
-
-    const updateImage = (index) => {
-      // img.src = currentFrame(index);
-      imgSrc = currentFrame(index);
-      // context.drawImage(img, 0, 0);
-    };
-
-    window.addEventListener("scroll", () => {
-      const maxScrollTop = html.scrollHeight - window.innerHeight;
-      const scrollFraction = scrollY / maxScrollTop;
-
-      const frameIndex = Math.min(
-        frameCount - 1,
-        Math.ceil(scrollFraction * frameCount)
-      );
-
-      requestAnimationFrame(() => updateImage(frameIndex + 1));
-      setCanvasOpacity(frameIndex + 1);
-      setTitleOpacity(frameIndex + 1);
-    });
-
-    preloadImages();
+    html = document.documentElement;
   });
 </script>
 
