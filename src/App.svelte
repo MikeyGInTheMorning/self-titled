@@ -8,7 +8,7 @@
 
   const canvasYStart = 10;
   const titleYEnd = 65;
-
+  const frameLengths = 10;
   const setTitleStyle = (opacity) => {
     titleStyle = `--title-opacity: ${opacity};`;
   };
@@ -18,14 +18,18 @@
   };
 
   const setCanvasOpacity = (index) => {
-    if (index <= canvasYStart) {
+    if (index > titleYEnd && index < titleYEnd + frameLengths) {
+      const outroOpacity = Math.abs((titleYEnd - index) / frameLengths + 1);
+      setCanvasStyle(outroOpacity);
+    } else if (index <= canvasYStart) {
       const intoOpacity = Math.abs((0 - index) / canvasYStart - 1) - 1;
       setCanvasStyle(intoOpacity);
+    } else if (index >= titleYEnd + frameLengths) {
+      setCanvasStyle(0);
     } else setCanvasStyle(1);
   };
 
   const setTitleOpacity = (index) => {
-    const frameLengths = 10;
     if (index > titleYEnd && index <= titleYEnd + frameLengths) {
       const outroOpacity = Math.abs((titleYEnd - index) / frameLengths + 1);
       setTitleStyle(outroOpacity);
@@ -44,9 +48,8 @@
       "hero-lightpass"
     ) as HTMLCanvasElement;
     const context = canvas.getContext("2d");
-
-    let url = `https://www.apple.com/105/media/us/airpods-pro/2019/1299e2f5_9206_4470_b28e_08307a42f19b/anim/sequence/large/01-hero-lightpass`;
-    url = "./assets/";
+    
+    const url = "./assets/";
     const frameCount = 77;
     const currentFrame = (index) =>
       `${url}${index.toString().padStart(5, "0")}.png`;
