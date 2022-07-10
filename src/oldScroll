@@ -1,5 +1,4 @@
 <script lang="ts">
-  import "./styles/global.css";
   import { onMount } from "svelte";
   import { registerSW } from "virtual:pwa-register";
 
@@ -49,7 +48,7 @@
       "hero-lightpass"
     ) as HTMLCanvasElement;
     const context = canvas.getContext("2d");
-
+    
     const url = "./assets/";
     const frameCount = 77;
     const currentFrame = (index) =>
@@ -119,6 +118,28 @@
 
     background-color: rgba(0, 0, 255, 0.15);
     color: white;
+  }
+  :global(html) {
+    background: rgba(0, 0, 0, 1) !important;
+    height: 100vh;
+  }
+  :global(body) {
+    background: rgba(0, 0, 0, 1) !important;
+    height: 500vh;
+  }
+  :global(body::-webkit-scrollbar) {
+    width: 12px; /* width of the entire scrollbar */
+    background: rgba(0, 0, 0, 0);
+  }
+
+  :global(body::-webkit-scrollbar-track) {
+    background: rgba(0, 0, 0, 0); /* color of the tracking area */
+  }
+
+  :global(body::-webkit-scrollbar-thumb) {
+    background-color: rgb(70, 70, 70); /* color of the scroll thumb */
+    border-radius: 20px; /* roundness of the scroll thumb */
+    border: 0px solid rgb(175, 175, 175); /* creates padding around scroll thumb */
   }
 
   .canvas-container {
