@@ -3,40 +3,38 @@
   import { registerSW } from "virtual:pwa-register";
 
   let titleStyle;
+  let canvasStyle;
   let scrollY;
+
+  const canvasYStart = 10;
+  const titleYEnd = 65;
 
   const setTitleStyle = (opacity) => {
     titleStyle = `--title-opacity: ${opacity};`;
   };
 
-  const setTitle = (index) => {
-    const titleYStart = 17;
-    const titleYEnd = 65;
-    const frameLengths = 10;
-
-    if (index >= titleYStart - frameLengths && index < titleYStart)
-    {
-      const opacity = (titleYStart - index) / frameLengths
-      console.log(opacity)
-      setTitleStyle(opacity);
-    }
-    else if(index <= titleYEnd + frameLengths && index > titleYEnd)
-    { 
-      console.log("this is outro")
-      setTitleStyle((titleYEnd - index) / frameLengths / 100);
-    }
-    else if(index >= titleYStart && index <=titleYEnd)
-    {
-      console.log("this is 1")
-      setTitleStyle(1)
-    }
-      else{
-        console.log("this is 0")
-        setTitleStyle(0)
-      }
+  const setCanvasStyle = (opacity) => {
+    canvasStyle = `--canvas-opacity: ${opacity};`;
   };
 
+  const setCanvasOpacity = (index) => {
+    if (index <= canvasYStart) {
+      const intoOpacity = Math.abs((0 - index) / canvasYStart - 1) - 1;
+      setCanvasStyle(intoOpacity);
+    } else setCanvasStyle(1);
+  };
 
+  const setTitleOpacity = (index) => {
+    const frameLengths = 10;
+    if (index > titleYEnd && index <= titleYEnd + frameLengths) {
+      const outroOpacity = Math.abs((titleYEnd - index) / frameLengths + 1);
+      setTitleStyle(outroOpacity);
+    } else if (index <= titleYEnd) {
+      setTitleStyle(1);
+    } else {
+      setTitleStyle(0);
+    }
+  };
 
   onMount(() => {
     registerSW();
@@ -83,9 +81,9 @@
         Math.ceil(scrollFraction * frameCount)
       );
 
-
       requestAnimationFrame(() => updateImage(frameIndex + 1));
-      setTitle(frameIndex + 1)
+      setCanvasOpacity(frameIndex + 1);
+      setTitleOpacity(frameIndex + 1);
     });
 
     preloadImages();
@@ -93,7 +91,7 @@
 </script>
 
 <svelte:window bind:scrollY />
-<div class="canvas-container">
+<div class="canvas-container" style={canvasStyle}>
   <canvas id="hero-lightpass" />
 </div>
 <div class="surface" style={titleStyle}>
@@ -147,6 +145,8 @@
     right: 0;
     bottom: 0;
     top: 0;
+
+    opacity: var(--canvas-opacity, 0);
 
     display: flex;
     align-items: center;
