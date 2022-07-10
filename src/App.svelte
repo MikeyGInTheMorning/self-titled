@@ -157,7 +157,7 @@
   }
 
   canvas {
-    width: 810px;
+    min-width: 210px;
     max-width: 810px;
   }
 </style>
