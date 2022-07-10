@@ -44,20 +44,12 @@
     }
   };
 
-  // const currentFrame = (index) => {
-  //   const url = "./assets/";
-  //   return `${url}${index.toString().padStart(5, "0")}.png`;
-  // };
+  const getImageUrl = (index) =>
+    `https://mg-portfolio.s3.amazonaws.com/face-shadow/${index
+      .toString()
+      .padStart(5, "0")}-min.jpg`;
 
-    const currentFrame = index => (
-    `https://mg-portfolio.s3.amazonaws.com/face-shadow/${index.toString().padStart(5, '0')}-min.jpg`
-  )
-  // const currentFrame = (index) =>
-  //   `https://www.apple.com/105/media/us/airpods-pro/2019/1299e2f5_9206_4470_b28e_08307a42f19b/anim/sequence/large/01-hero-lightpass/${index
-  //     .toString()
-  //     .padStart(4, "0")}.jpg`;
-
-  let imgSrc = currentFrame(1);
+  let imgSrc = getImageUrl(1);
   const calculateScroll = () => {
     if (!html) return;
     const maxScrollTop = html.scrollHeight - window.innerHeight;
@@ -69,7 +61,7 @@
     );
 
     const nextFrameIndex = frameIndex + 1;
-    imgSrc = currentFrame(nextFrameIndex);
+    imgSrc = getImageUrl(nextFrameIndex);
     setCanvasOpacity(nextFrameIndex);
     setTitleOpacity(nextFrameIndex);
   };
@@ -82,10 +74,10 @@
 
   const preloadImages = () =>
     [...Array(frameCount).keys()].forEach((index) =>
-    fetch(currentFrame(index), {
-        mode: 'no-cors',
+      fetch(getImageUrl(index), {
+        mode: "no-cors",
         method: "GET",
-    })
+      })
     );
   preloadImages();
 </script>
