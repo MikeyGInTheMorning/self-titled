@@ -5,12 +5,13 @@
 
   let titleStyle;
   let canvasStyle;
+  let scrollStyle;
   let scrollY;
   let html;
 
   const frameCount = 77;
-  const canvasYStart = 10;
-  const titleYEnd = 65;
+  const backgroundStart = 10;
+  const titleEnd = 65;
   const frameLengths = 10;
 
   const setTitleStyle = (opacity) => {
@@ -21,23 +22,36 @@
     canvasStyle = `--canvas-opacity: ${opacity};`;
   };
 
+  const setScrollStyle = (opacity) => {
+    scrollStyle = `--scroll-opacity: ${opacity};`;
+  };
+
   const setCanvasOpacity = (index) => {
-    if (index > titleYEnd && index < titleYEnd + frameLengths) {
-      const outroOpacity = Math.abs((titleYEnd - index) / frameLengths + 1);
+    if (index > titleEnd && index < titleEnd + frameLengths) {
+      const outroOpacity = Math.abs((titleEnd - index) / frameLengths + 1);
       setCanvasStyle(outroOpacity);
-    } else if (index <= canvasYStart) {
-      const intoOpacity = Math.abs((0 - index) / canvasYStart - 1) - 1;
+    } else if (index <= backgroundStart) {
+      const intoOpacity = Math.abs((0 - index) / backgroundStart - 1) - 1;
       setCanvasStyle(intoOpacity);
-    } else if (index >= titleYEnd + frameLengths) {
+    } else if (index >= titleEnd + frameLengths) {
       setCanvasStyle(0);
     } else setCanvasStyle(1);
   };
 
+  const setScrollOpacity = (index) => {
+    if (index > 0 && index < 8) {
+      const outroOpacity = Math.abs((4 - index) / 4 + 1);
+      setScrollStyle(outroOpacity);
+    } else {
+      setScrollStyle(0);
+    }
+  };
+
   const setTitleOpacity = (index) => {
-    if (index > titleYEnd && index <= titleYEnd + frameLengths) {
-      const outroOpacity = Math.abs((titleYEnd - index) / frameLengths + 1);
+    if (index > titleEnd && index <= titleEnd + frameLengths) {
+      const outroOpacity = Math.abs((titleEnd - index) / frameLengths + 1);
       setTitleStyle(outroOpacity);
-    } else if (index <= titleYEnd) {
+    } else if (index <= titleEnd) {
       setTitleStyle(1);
     } else {
       setTitleStyle(0);
@@ -62,8 +76,10 @@
 
     const nextFrameIndex = frameIndex + 1;
     imgSrc = getImageUrl(nextFrameIndex);
+
     setCanvasOpacity(nextFrameIndex);
     setTitleOpacity(nextFrameIndex);
+    setScrollOpacity(nextFrameIndex);
   };
   $: scrollY && calculateScroll();
 
@@ -86,13 +102,22 @@
 <div class="background" style={canvasStyle}>
   <img src={imgSrc} alt="Loading..." referrerpolicy="no-referrer" />
 </div>
-<div class="surface" style={titleStyle}>
-  <div class="on-surface title">Mike Gulik.</div>
+<div class="surface">
+  <div class="title" style={titleStyle}>Mike Gulik.</div>
+  <div class="scroll-sign" style={scrollStyle}>(scroll)</div>
 </div>
 
 <style>
   .title {
+    font-size: xx-large;
     opacity: var(--title-opacity, 1);
+  }
+
+  .scroll-sign {
+    position: fixed;
+    bottom: 20rem;
+    font-size: small;
+    opacity: var(--scroll-opacity, 1);
   }
   .surface {
     position: fixed;
