@@ -41,39 +41,42 @@
     }
   };
 
+  const currentFrame = (index) => {
+    const url = "./assets/";
+    return `${url}${index.toString().padStart(5, "0")}.png`;
+  };
+
+  let imgSrc = currentFrame(1);
   onMount(() => {
     registerSW();
 
     const html = document.documentElement;
-    const canvas = document.getElementById(
-      "hero-lightpass"
-    ) as HTMLCanvasElement;
-    const context = canvas.getContext("2d");
+    // const canvas = document.getElementById(
+    //   "hero-lightpass"
+    // ) as HTMLCanvasElement;
+    // const context = canvas.getContext("2d");
 
-    const url = "./assets/";
     const frameCount = 77;
-    const currentFrame = (index) =>
-      `${url}${index.toString().padStart(5, "0")}.png`;
 
     const preloadImages = () => {
       for (let i = 1; i < frameCount; i++) {
-        const img = new Image();
-        img.src = currentFrame(i);
+        //imgSrc = currentFrame(i);
       }
     };
 
-    const img = new Image();
-    img.src = currentFrame(1);
-    canvas.width = html.offsetWidth > 810 ? 810 : html.offsetWidth;
-    canvas.height = html.offsetHeight > 1080 ? 1080 : html.offsetHeight;
+    // const img = new Image();
+    // img.src = currentFrame(1);
+    // canvas.width = html.offsetWidth > 810 ? 810 : html.offsetWidth;
+    // canvas.height = html.offsetHeight > 1080 ? 1080 : html.offsetHeight;
 
-    img.onload = function () {
-      context.drawImage(img, 0, 0);
-    };
+    // img.onload = function () {
+    //   context.drawImage(img, 0, 0);
+    // };
 
     const updateImage = (index) => {
-      img.src = currentFrame(index);
-      context.drawImage(img, 0, 0);
+      // img.src = currentFrame(index);
+      imgSrc = currentFrame(index);
+      // context.drawImage(img, 0, 0);
     };
 
     window.addEventListener("scroll", () => {
@@ -96,7 +99,8 @@
 
 <svelte:window bind:scrollY />
 <div class="canvas-container" style={canvasStyle}>
-  <canvas id="hero-lightpass" />
+  <img src={imgSrc} alt="Loading..." />
+  <!-- <canvas id="hero-lightpass" /> -->
 </div>
 <div class="surface" style={titleStyle}>
   <div class="on-surface title">Mike Gulik.</div>
