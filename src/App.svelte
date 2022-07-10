@@ -59,7 +59,8 @@
   };
 
   const getImageUrl = (index) =>
-    `https://mg-portfolio.s3.amazonaws.com/face-shadow/${index
+
+    `https://mg-portfolio.s3.amazonaws.com/face-shadow/${(index == 0 ? 1 : index)
       .toString()
       .padStart(5, "0")}-min.jpg`;
 
@@ -115,7 +116,7 @@
 
   .scroll-sign {
     position: fixed;
-    bottom: 20rem;
+    bottom: 20vh;
     font-size: small;
     opacity: var(--scroll-opacity, 1);
   }
