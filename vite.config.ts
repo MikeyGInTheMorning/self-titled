@@ -9,6 +9,7 @@ const pwaOptions = (a: ConfigEnv): Partial<VitePWAOptions> => ({
   workbox: {
     clientsClaim: true,
     skipWaiting: true,
+    cleanupOutdatedCaches: false,
     globPatterns: ["**/*.{css,html,png}"],
     runtimeCaching: [
       {

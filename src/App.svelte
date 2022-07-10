@@ -5,6 +5,7 @@
   let titleStyle;
   let canvasStyle;
   let scrollY;
+  let areImagesLoaded = false;
 
   const canvasYStart = 10;
   const titleYEnd = 65;
@@ -41,14 +42,28 @@
   };
 
   onMount(() => {
-    registerSW();
+    registerSW({
+      onOfflineReady() {
+        console.log('hi')
+        areImagesLoaded = true
+        const myTimeout = setTimeout(setCanvasData, 250);
+        
+      }
+    });
+    setCanvasData()
+  });
+
+  const setCanvasData = () => {
+    if(!areImagesLoaded)
+      return
 
     const html = document.documentElement;
     const canvas = document.getElementById(
       "hero-lightpass"
     ) as HTMLCanvasElement;
+
     const context = canvas.getContext("2d");
-    
+
     const url = "./assets/";
     const frameCount = 77;
     const currentFrame = (index) =>
@@ -90,13 +105,15 @@
     });
 
     preloadImages();
-  });
+  };
 </script>
 
 <svelte:window bind:scrollY />
-<div class="canvas-container" style={canvasStyle}>
-  <canvas id="hero-lightpass" />
-</div>
+{#if areImagesLoaded}
+  <div class="canvas-container" style={canvasStyle}>
+    <canvas id="hero-lightpass" />
+  </div>
+{/if}
 <div class="surface" style={titleStyle}>
   <div class="on-surface title">Mike Gulik.</div>
 </div>
