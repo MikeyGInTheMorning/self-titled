@@ -9,7 +9,7 @@ const pwaOptions = (a: ConfigEnv): Partial<VitePWAOptions> => ({
   workbox: {
     clientsClaim: true,
     skipWaiting: true,
-    globPatterns: ["**/*.{js,css,html,jpg,png}"],
+    globPatterns: ["**/*.{js,css,html,jpg,png}", "./assets/*.png"],
     runtimeCaching: [
       {
         urlPattern: /^https:\/\/www.apple.com\/.*/i,
