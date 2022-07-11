@@ -1,5 +1,5 @@
 # Clone of Apple image scroll
-A simple site to tryout image loading from scroll - as Apple has done with the airpod pros. Includes vite PWA. Includes Netlify.
+A simple site to tryout image loading from scroll - as Apple has done with the airpod pros. Includes vite PWA. Trying out Netlify. Images hosted in AWS s3 bucket.
 
 ## To Run
 
