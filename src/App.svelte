@@ -6,6 +6,7 @@
   let titleStyle;
   let canvasStyle;
   let scrollStyle;
+  let tbdStyle;
   let scrollY;
   let html;
 
@@ -24,6 +25,10 @@
 
   const setScrollStyle = (opacity) => {
     scrollStyle = `--scroll-opacity: ${opacity};`;
+  };
+
+  const setTBDStyle = (opacity) => {
+    tbdStyle = `--tbd-opacity: ${opacity};`;
   };
 
   const setCanvasOpacity = (index) => {
@@ -47,6 +52,15 @@
     }
   };
 
+  const setTBDOpacity = (index) => {
+    if (index > frameCount - 8 && index <= frameCount) {
+      const outroOpacity = Math.abs((4 - index) / 4 + 1);
+      setTBDStyle(outroOpacity);
+    } else {
+      setTBDStyle(0);
+    }
+  };
+
   const setTitleOpacity = (index) => {
     if (index > titleEnd && index <= titleEnd + frameLengths) {
       const outroOpacity = Math.abs((titleEnd - index) / frameLengths + 1);
@@ -59,8 +73,10 @@
   };
 
   const getImageUrl = (index) =>
-
-    `https://mg-portfolio.s3.amazonaws.com/face-shadow/${(index == 0 ? 1 : index)
+    `https://mg-portfolio.s3.amazonaws.com/face-shadow/${(index == 0
+      ? 1
+      : index
+    )
       .toString()
       .padStart(5, "0")}-min.jpg`;
 
@@ -81,6 +97,7 @@
     setCanvasOpacity(nextFrameIndex);
     setTitleOpacity(nextFrameIndex);
     setScrollOpacity(nextFrameIndex);
+    setTBDOpacity(nextFrameIndex);
   };
   $: scrollY && calculateScroll();
 
@@ -106,6 +123,17 @@
 <div class="surface">
   <div class="title" style={titleStyle}>Mike Gulik.</div>
   <div class="scroll-sign" style={scrollStyle}>(scroll)</div>
+  <div class="tbd" style={tbdStyle}>
+    <div class="tbd-header">
+      To Be Continued - Refactor, bio, fast stats, links to <a
+        href="https://github.com/MikeyGInTheMorning/simple-scroll-animate"
+        >github</a
+      >, my biometrics.
+    </div>
+    <div class="header-bottom">
+      <button on:click="{()=> {document.body.scrollIntoView()}}">(To Top)</button>
+    </div>
+  </div>
 </div>
 
 <style>
@@ -113,7 +141,17 @@
     font-size: xx-large;
     opacity: var(--title-opacity, 1);
   }
+  .tbd {
+    position: fixed;
+    bottom: 20vh;
+    font-size: x-small;
 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    opacity: var(--tbd-opacity, 0);
+  }
   .scroll-sign {
     position: fixed;
     bottom: 20vh;
@@ -147,4 +185,14 @@
     align-items: center;
     justify-content: center;
   }
+
+  button {
+	background: none;
+	color: inherit;
+	border: none;
+	padding: 0;
+	font: inherit;
+	cursor: none;
+	outline: inherit;
+}
 </style>
