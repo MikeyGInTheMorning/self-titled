@@ -125,13 +125,19 @@
   <div class="scroll-sign" style={scrollStyle}>(scroll)</div>
   <div class="tbd" style={tbdStyle}>
     <div class="tbd-header">
-      To Be Continued - Refactor, bio, fast stats, links to <a
-        href="https://github.com/MikeyGInTheMorning/simple-scroll-animate"
-        >github</a
+      To Be Continued - Refactor, bio, fast stats, fancier <button style="text-decoration: underline;"
+        on:click={() => {
+          window.location.href =
+            "https://github.com/MikeyGInTheMorning/self-titled";
+        }}>github links</button
       >, my biometrics.
     </div>
     <div class="header-bottom">
-      <button on:click="{()=> {document.body.scrollIntoView()}}">(To Top)</button>
+      <button
+        on:click={() => {
+          document.body.scrollIntoView();
+        }}>(To Top)</button
+      >
     </div>
   </div>
 </div>
@@ -187,12 +193,12 @@
   }
 
   button {
-	background: none;
-	color: inherit;
-	border: none;
-	padding: 0;
-	font: inherit;
-	cursor: none;
-	outline: inherit;
-}
+    background: none;
+    color: inherit;
+    border: none;
+    padding: 0;
+    font: inherit;
+    cursor: none;
+    outline: inherit;
+  }
 </style>
