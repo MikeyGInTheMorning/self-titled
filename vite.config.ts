@@ -1,6 +1,7 @@
 import { ConfigEnv, defineConfig } from "vite";
 import { svelte } from "@sveltejs/vite-plugin-svelte";
 import { VitePWA, VitePWAOptions } from "vite-plugin-pwa";
+import Unocss from "unocss/vite";
 
 const pwaOptions = (a: ConfigEnv): Partial<VitePWAOptions> => ({
   registerType: "autoUpdate",
@@ -74,5 +75,10 @@ const pwaOptions = (a: ConfigEnv): Partial<VitePWAOptions> => ({
 
 // https://vitejs.dev/config/
 export default defineConfig((a) => ({
-  plugins: [svelte(), VitePWA(pwaOptions(a))],
+  resolve: {
+    alias: {
+      $lib: '/src/lib',
+    },
+  },
+  plugins: [svelte(), VitePWA(pwaOptions(a)), Unocss('./unocss.config.js')],
 }));
