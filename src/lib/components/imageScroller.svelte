@@ -86,7 +86,7 @@
     const maxScrollTop = html.scrollHeight - window.innerHeight
     const scrollFraction = scrollY / maxScrollTop
 
-    const frameIndex = Math.min(
+    frameIndex = Math.min(
       frameCount - 1,
       Math.ceil(scrollFraction * frameCount)
     )
@@ -98,9 +98,13 @@
     setTitleOpacity(nextFrameIndex)
     setScrollOpacity(nextFrameIndex)
     setTBDOpacity(nextFrameIndex)
+
+    showImages = frameIndex < 76
   }
   $: scrollY && calculateScroll()
 
+  let frameIndex
+  let showImages
   onMount(() => {
     html = document.documentElement
   })
@@ -116,35 +120,38 @@
 </script>
 
 <svelte:window bind:scrollY />
-<div class="background" style={canvasStyle}>
-  <img src={imgSrc} alt="Loading..." referrerpolicy="no-referrer" />
-</div>
-<div class="surface">
-  <div class="title" style={titleStyle}>Mike Gulik.</div>
-  <div class="scroll-sign" style={scrollStyle}>(scroll)</div>
-  <div class="tbd" style={tbdStyle}>
-    <div class="tbd-header">
-      To Be Continued - Refactor, bio, fast stats, fancier <button
-        style="text-decoration: underline;"
-        on:click={() => {
-          window.location.href =
-            "https://github.com/MikeyGInTheMorning/self-titled"
-        }}>github links</button
-      >, my biometrics.
-    </div>
-    <div class="header-bottom">
-      <button
-        on:click={() => {
-          document.body.scrollIntoView()
-        }}>(To Top)</button
-      >
+
+{#if showImages}
+  <div class="background" style={canvasStyle}>
+    <img src={imgSrc} alt="Loading..." referrerpolicy="no-referrer" />
+  </div>
+  <div class="surface">
+    <div class="title" style={titleStyle}>Mike Gulik.</div>
+    <div class="scroll-sign" style={scrollStyle}>(scroll)</div>
+    <div class="tbd" style={tbdStyle}>
+      <div class="tbd-header">
+        To Be Continued - Refactor, bio, fast stats, fancier <button
+          style="text-decoration: underline;"
+          on:click={() => {
+            window.location.href =
+              "https://github.com/MikeyGInTheMorning/self-titled"
+          }}>github links</button
+        >, my biometrics.{frameIndex}{showImages}
+      </div>
+      <div class="header-bottom">
+        <button
+          on:click={() => {
+            document.body.scrollIntoView()
+          }}>(To Top)</button
+        >
+      </div>
     </div>
   </div>
-</div>
+{/if}
 
 <style>
   .title {
-    top:40vh;
+    top: 40vh;
     font-size: xx-large;
     opacity: var(--title-opacity, 1);
   }
