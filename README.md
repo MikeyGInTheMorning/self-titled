@@ -19,3 +19,5 @@ pnpm dev
 [Favicon Generator](https://favicon.io/favicon-converter/)
 
 [Compress PNG](https://compresspng.com/)
+
+[TailwindCSS](https://tailwindcss.com/docs/installation)

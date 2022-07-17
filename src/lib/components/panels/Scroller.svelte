@@ -1,7 +1,6 @@
 <script lang="ts">
-  import "./../../styles/global.css"
   import { onMount } from "svelte"
-  import { registerSW } from "virtual:pwa-register"
+  import Panel from "../Panel.svelte"
 
   let titleStyle
   let canvasStyle
@@ -104,7 +103,7 @@
   $: scrollY && calculateScroll()
 
   let frameIndex
-  let showImages
+  let showImages = true
   onMount(() => {
     html = document.documentElement
   })
@@ -121,33 +120,37 @@
 
 <svelte:window bind:scrollY />
 
-{#if showImages}
-  <div class="background" style={canvasStyle}>
-    <img src={imgSrc} alt="Loading..." referrerpolicy="no-referrer" />
-  </div>
-  <div class="surface">
-    <div class="title" style={titleStyle}>Mike Gulik.</div>
-    <div class="scroll-sign" style={scrollStyle}>(scroll)</div>
-    <div class="tbd" style={tbdStyle}>
-      <div class="tbd-header">
-        To Be Continued - Refactor, bio, fast stats, fancier <button
-          style="text-decoration: underline;"
-          on:click={() => {
-            window.location.href =
-              "https://github.com/MikeyGInTheMorning/self-titled"
-          }}>github links</button
-        >, my biometrics.{frameIndex}{showImages}
+<Panel>
+  {#if showImages}
+    <div class="relative h-500vh">
+      <div class="background" style={canvasStyle}>
+        <img src={imgSrc} alt="Loading..." referrerpolicy="no-referrer" />
       </div>
-      <div class="header-bottom">
-        <button
-          on:click={() => {
-            document.body.scrollIntoView()
-          }}>(To Top)</button
-        >
+      <div class="surface">
+        <div class="title" style={titleStyle}>Mike Gulik.</div>
+        <div class="scroll-sign" style={scrollStyle}>(scroll)</div>
+        <div class="tbd" style={tbdStyle}>
+          <div class="tbd-header">
+            To Be Continued - Refactor, bio, fast stats, fancier <button
+              style="text-decoration: underline;"
+              on:click={() => {
+                window.location.href =
+                  "https://github.com/MikeyGInTheMorning/self-titled"
+              }}>github links</button
+            >, my biometrics.{frameIndex}{showImages}
+          </div>
+          <div class="header-bottom">
+            <button
+              on:click={() => {
+                document.body.scrollIntoView()
+              }}>(To Top)</button
+            >
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-{/if}
+  {/if}
+</Panel>
 
 <style>
   .title {
