@@ -98,7 +98,7 @@
     setScrollOpacity(nextFrameIndex)
     setTBDOpacity(nextFrameIndex)
 
-    showImages = frameIndex < 76
+   // showImages = frameIndex < 76
   }
   $: scrollY && calculateScroll()
 
@@ -127,26 +127,8 @@
         <img src={imgSrc} alt="Loading..." referrerpolicy="no-referrer" />
       </div>
       <div class="surface">
-        <div class="title" style={titleStyle}>Mike Gulik.</div>
+        <div class="title top-50" style={titleStyle}>Mike Gulik.</div>
         <div class="scroll-sign" style={scrollStyle}>(scroll)</div>
-        <div class="tbd" style={tbdStyle}>
-          <div class="tbd-header">
-            To Be Continued - Refactor, bio, fast stats, fancier <button
-              style="text-decoration: underline;"
-              on:click={() => {
-                window.location.href =
-                  "https://github.com/MikeyGInTheMorning/self-titled"
-              }}>github links</button
-            >, my biometrics.{frameIndex}{showImages}
-          </div>
-          <div class="header-bottom">
-            <button
-              on:click={() => {
-                document.body.scrollIntoView()
-              }}>(To Top)</button
-            >
-          </div>
-        </div>
       </div>
     </div>
   {/if}
@@ -154,21 +136,11 @@
 
 <style>
   .title {
-    top: 40vh;
-    font-size: xx-large;
+    padding-top: 20rem;
+    font-size: xxx-large;
     opacity: var(--title-opacity, 1);
   }
-  .tbd {
-    position: fixed;
-    bottom: 20vh;
-    font-size: x-small;
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 2rem;
-    opacity: var(--tbd-opacity, 0);
-  }
+  
   .scroll-sign {
     position: fixed;
     bottom: 20vh;
@@ -194,15 +166,5 @@
     display: flex;
     align-items: center;
     justify-content: center;
-  }
-
-  button {
-    background: none;
-    color: inherit;
-    border: none;
-    padding: 0;
-    font: inherit;
-    cursor: none;
-    outline: inherit;
   }
 </style>
