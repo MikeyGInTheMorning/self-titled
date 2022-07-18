@@ -21,3 +21,5 @@ pnpm dev
 [Compress PNG](https://compresspng.com/)
 
 [TailwindCSS](https://tailwindcss.com/docs/installation)
+
+[Coolors - for themeing](https://coolors.co/)

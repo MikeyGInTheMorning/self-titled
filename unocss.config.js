@@ -60,19 +60,19 @@ export default {
       rules: [[/^visibility-(.*)$/, ([, c]) => ({ "content-visibility": c })]],
       theme: {
         colors: {
-          primary: "rgb(var(--color-primary, 251, 144, 101))", // electric orange
-          secondary: "rgb(var(--color-secondary, 51, 207, 235))", // light blue
-          tertiary: "rgb(var(--color-tertiary, 32, 26, 132))", // classic indigo
-          background: "rgb(var(--color-background, 77, 44, 251))", // loud purple
-          surface: "rgb(var(--color-surface, 255, 255, 255))", // white
-          error: "rgb(var(--color-error, 253, 111, 136))", // bold coral
+          primary: "rgb(var(--color-primary, 69, 69, 72))", // onyx
+          secondary: "rgb(var(--color-secondary, 99, 26, 134))", //  gray web
+          tertiary: "rgb(var(--color-tertiary,  1, 142, 237))", // Bleu De France
+          background: "rgb(var(--color-background, 126, 127, 131))", // Bleu De France
+          surface: "rgb(var(--color-surface, 241, 237, 238))", // cultured
+          error: "rgb(var(--color-error, 154, 3, 30))", // ruby red
 
-          onprimary: "rgb(var(--color-on-primary, 255, 255, 255))", // white
-          onsecondary: "rgb(var(--color-on-secondary, 255, 255, 255))", // white
-          ontertiary: "rgb(var(--color-on-tertiary, 255, 255, 255))", // white
-          onbackground: "rgb(var(--color-on-background, 255, 255, 255))", // white
-          onsurface: "rgb(var(--color-on-surface, 17, 17, 17))", // black
-          onerror: "rgb(var(--color-on-error, 255, 255, 255))", // white
+          onprimary: "rgb(var(--color-on-primary, 241, 237, 238))", // cultured
+          onsecondary: "rgb(var(--color-on-secondary, 241, 237, 238))", // cultured
+          ontertiary: "rgb(var(--color-on-tertiary, 241, 237, 238))", // cultured
+          onbackground: "rgb(var(--color-on-background, 241, 237, 238))", // cultured
+          onsurface: "rgb(var(--color-on-surface, 4, 4, 4))", // black
+          onerror: "rgb(var(--color-on-error, 241, 237, 238))", // cultured
         },
       },
     },
