@@ -11,8 +11,10 @@
   });
 </script>
 
-<div class="grid grid-cols-1 gap-50 pb-20">
+<div class="flex flex-col">
   <Scroller />
-  <Github />
-  <About />
+  <div class="z-10 grid grid-cols-1 gap-50 pb-20">
+    <Github />
+    <About />
+  </div>
 </div>

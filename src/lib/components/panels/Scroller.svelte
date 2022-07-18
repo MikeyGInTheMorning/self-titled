@@ -5,13 +5,13 @@
   let titleStyle;
   let canvasStyle;
   let scrollStyle;
-  let tbdStyle;
+  let frameIndex;
   let scrollY;
   let html;
 
   const frameCount = 77;
   const backgroundStart = 10;
-  const titleEnd = 65;
+  const titleEnd = 55;
   const frameLengths = 10;
 
   const setTitleStyle = (opacity) => {
@@ -25,7 +25,6 @@
   const setScrollStyle = (opacity) => {
     scrollStyle = `opacity: ${opacity};`;
   };
-
 
   const setCanvasOpacity = (index) => {
     if (index > titleEnd && index < titleEnd + frameLengths) {
@@ -45,15 +44,6 @@
       setScrollStyle(outroOpacity);
     } else {
       setScrollStyle(0);
-    }
-  };
-
-  const setTBDOpacity = (index) => {
-    if (index > frameCount - 8 && index <= frameCount) {
-      const outroOpacity = Math.abs((4 - index) / 4 + 1);
-     // setTBDStyle(outroOpacity);
-    } else {
-      //setTBDStyle(0);
     }
   };
 
@@ -93,14 +83,9 @@
     setCanvasOpacity(nextFrameIndex);
     setTitleOpacity(nextFrameIndex);
     setScrollOpacity(nextFrameIndex);
-    setTBDOpacity(nextFrameIndex);
-
-    // showImages = frameIndex < 76
   };
   $: scrollY && calculateScroll();
 
-  let frameIndex;
-  let showImages = true;
   onMount(() => {
     html = document.documentElement;
   });
@@ -117,38 +102,15 @@
 
 <svelte:window bind:scrollY />
 
-{#if showImages}
-  <div class="relative h-300vh">
-    <div class="background" style={canvasStyle}>
-      <img src={imgSrc} alt="Loading..." referrerpolicy="no-referrer" />
-    </div>
-    <div class="surface">
-      <div class="top-50 text-2xl" style={titleStyle}>Mike Gulik.</div>
-      <div class="fixed bottom-20vh text-sm" style={scrollStyle}>(scroll)</div>
-    </div>
+<div id="scroller-container" class="relative h-150vh z-0">
+  <div
+    class="fixed left-0 right-0 bottom-0 top-0 flex items-center justify-center"
+    style={canvasStyle}
+  >
+    <img src={imgSrc} alt="Loading..." referrerpolicy="no-referrer" />
   </div>
-{/if}
-
-<style>
-
-  .surface {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    color: white;
-  }
-  .background {
-    position: fixed;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    top: 0;
-
-    opacity: var(--canvas-opacity, 0);
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-</style>
+  <div class="flex items-center justify-center color-surface">
+    <div class="top-50 text-2xl" style={titleStyle}>Mike Gulik.</div>
+    <div class="fixed bottom-20vh text-sm" style={scrollStyle}>(scroll)</div>
+  </div>
+</div>
