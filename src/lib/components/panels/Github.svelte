@@ -9,14 +9,16 @@
 
 <div class="">
   <Panel panelTitle="Github">
-    <iframe
-      width="100%"
-      height="400px"
-      title="Github Skyline"
-      id="mikes-github-skyline"
-      frameborder="0"
-      scrolling="no"
-      src={myRepoUrl}
-    />
+    <div class="flex flex-col">
+      <iframe
+        width="100%"
+        height="400px"
+        title="Github Skyline"
+        id="mikes-github-skyline"
+        frameborder="0"
+        scrolling="no"
+        src={myRepoUrl}
+      />
+    </div>
   </Panel>
 </div>
