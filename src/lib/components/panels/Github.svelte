@@ -7,7 +7,7 @@
   const myRepoUrl = `${BASE_EMBED_URL}/MikeyGInTheMorning/self-titled/dev/public/github/MikeyGInTheMorning-2022.stl`;
 </script>
 
-<div class="pb-50">
+<div class="">
   <Panel panelTitle="Github">
     <iframe
       width="100%"

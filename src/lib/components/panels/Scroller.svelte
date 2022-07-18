@@ -15,20 +15,17 @@
   const frameLengths = 10;
 
   const setTitleStyle = (opacity) => {
-    titleStyle = `--title-opacity: ${opacity};`;
+    titleStyle = `opacity: ${opacity};`;
   };
 
   const setCanvasStyle = (opacity) => {
-    canvasStyle = `--canvas-opacity: ${opacity};`;
+    canvasStyle = `opacity: ${opacity};`;
   };
 
   const setScrollStyle = (opacity) => {
-    scrollStyle = `--scroll-opacity: ${opacity};`;
+    scrollStyle = `opacity: ${opacity};`;
   };
 
-  const setTBDStyle = (opacity) => {
-    tbdStyle = `--tbd-opacity: ${opacity};`;
-  };
 
   const setCanvasOpacity = (index) => {
     if (index > titleEnd && index < titleEnd + frameLengths) {
@@ -54,9 +51,9 @@
   const setTBDOpacity = (index) => {
     if (index > frameCount - 8 && index <= frameCount) {
       const outroOpacity = Math.abs((4 - index) / 4 + 1);
-      setTBDStyle(outroOpacity);
+     // setTBDStyle(outroOpacity);
     } else {
-      setTBDStyle(0);
+      //setTBDStyle(0);
     }
   };
 
@@ -121,30 +118,19 @@
 <svelte:window bind:scrollY />
 
 {#if showImages}
-  <div class="relative h-500vh">
+  <div class="relative h-300vh">
     <div class="background" style={canvasStyle}>
       <img src={imgSrc} alt="Loading..." referrerpolicy="no-referrer" />
     </div>
     <div class="surface">
-      <div class="title top-50" style={titleStyle}>Mike Gulik.</div>
-      <div class="scroll-sign" style={scrollStyle}>(scroll)</div>
+      <div class="top-50 text-2xl" style={titleStyle}>Mike Gulik.</div>
+      <div class="fixed bottom-20vh text-sm" style={scrollStyle}>(scroll)</div>
     </div>
   </div>
 {/if}
 
 <style>
-  .title {
-    padding-top: 20rem;
-    font-size: xxx-large;
-    opacity: var(--title-opacity, 1);
-  }
 
-  .scroll-sign {
-    position: fixed;
-    bottom: 20vh;
-    font-size: small;
-    opacity: var(--scroll-opacity, 1);
-  }
   .surface {
     display: flex;
     align-items: center;
