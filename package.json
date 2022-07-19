@@ -10,20 +10,20 @@
     "check": "svelte-check --tsconfig ./tsconfig.json"
   },
   "devDependencies": {
-    "@iconify/json": "^2.1.78",
-    "@sveltejs/vite-plugin-svelte": "^1.0.0-next.30",
-    "@tsconfig/svelte": "^2.0.1",
-    "svelte": "^3.44.0",
-    "svelte-check": "^2.2.7",
-    "svelte-preprocess": "^4.9.8",
-    "tslib": "^2.3.1",
-    "typescript": "^4.5.4",
-    "vite": "^3.0.0",
-    "vite-plugin-pwa": "^0.12.2"
+    "@iconify/json": "^2.1.79",
+    "@sveltejs/vite-plugin-svelte": "^1.0.1",
+    "@tsconfig/svelte": "^3.0.0",
+    "svelte": "^3.49.0",
+    "svelte-check": "^2.8.0",
+    "svelte-preprocess": "^4.10.7",
+    "tslib": "^2.4.0",
+    "typescript": "^4.7.4",
+    "vite": "^3.0.2",
+    "vite-plugin-pwa": "^0.12.3"
   },
   "dependencies": {
     "@types/workbox-window": "^4.3.4",
-    "pnpm": "^7.5.0",
+    "pnpm": "^7.5.2",
     "unocss": "^0.44.3",
     "workbox-window": "^6.5.3"
   }
